@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native'
 import styles from './styles';
 import PlaceItem from './PlaceItem';
 
-const API_KEY = 'AIzaSyAIMvqH0dqYR2ASjVloEJq8apqZbwonoME';
+const API_KEY = 'YOUR_API_KEY';
 
 const homePlace = {
     description: 'Home',
