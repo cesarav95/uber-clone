@@ -3,11 +3,20 @@ import { Image } from 'react-native';
 import MapView, {Marker} from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions'
 
-const origin = {latitude: -13.5166227, longitude: -71.9794432};
-const destination = {latitude: -13.519207, longitude: -71.9798207};
+
 const GOOGLE_MAPS_APIKEY = 'AIzaSyAIMvqH0dqYR2ASjVloEJq8apqZbwonoME';
 
-const Route = (props) => {
+const Route = ({origin, destination}) => {
+
+    const originLocation = {
+        latitude: origin.details.geometry.location.lat,
+        longitude: origin.details.geometry.location.lng
+    }; 
+    const destinationLocation = {
+        latitude: destination.details.geometry.location.lat,
+        longitude: destination.details.geometry.location.lng
+    };
+
     return (
             <MapView 
                 style={{
@@ -20,19 +29,21 @@ const Route = (props) => {
                 latitudeDelta: 0.0922,
                 longitudeDelta: 0.0421,
                 }}
+                showsUserLocation={true}
             > 
                 <MapViewDirections
-                    origin={origin}
-                    destination={destination}
+                    origin={originLocation}
+                    destination={destinationLocation}
                     apikey={GOOGLE_MAPS_APIKEY}
                     strokeWidth={3}
                     strokeColor="red"
+                    
                 />    
 
                 <Marker 
                     key={1}
                     title={'Origin'}
-                    coordinate={origin}                    
+                    coordinate={originLocation}                    
                 >
                     <Image
                         source={require('../../assets/images/pin_marker.png')}
@@ -42,7 +53,7 @@ const Route = (props) => {
                 <Marker 
                     key={2}
                     title={'Destination'}
-                    coordinate={destination}                    
+                    coordinate={destinationLocation}                    
                 >
                     <Image
                         source={require('../../assets/images/pin_marker.png')}

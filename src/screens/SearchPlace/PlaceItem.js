@@ -10,12 +10,17 @@ const PlaceItem = (props) => {
         <View style={styles.itemContainer}>
             <View style={styles.iconContainer}>
                 {/*<Entypo name='location-pin' size={20} color={'white'} />*/}
-                <Image
+                {
+                    data.description === 'Home' ? <Entypo name='home' size={20} color={'#0080ff'} />:
+                    data.description === 'Work'? <Entypo name='bucket' size={20} color={'#000708'} /> :
+                    <Image
                 source={require('../../assets/images/cube.png')}
                 style={{ height:25, width: 25, resizeMode: 'contain'}} 
                 />
+                }
+                
             </View>
-            <Text style={styles.placeText}> {data.description} </Text>
+            <Text style={styles.placeText}> {data.description || data.vicinity} </Text>
 
         </View>
     );

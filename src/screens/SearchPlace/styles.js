@@ -7,7 +7,8 @@ const styles = StyleSheet.create({
     textInput: {
         backgroundColor: 'white',
         marginVertical:5,
-        marginLeft: 20
+        marginLeft: 20,
+        paddingHorizontal: 15
     },
     itemContainer: {
         flexDirection: 'row',
@@ -38,12 +39,30 @@ const styles = StyleSheet.create({
         right: 10
     },
     square: {
-        width: 5,
-        height: 5,
-        backgroundColor: 'black',
+        width: 7,
+        height: 7,
+        backgroundColor: 'rgb(73, 73, 73)',
         position: 'absolute',
-        top : 20,
-        left: 0
+        top : 80,
+        left: 15
+    },
+    circle: {
+        width: 7,
+        height: 7,
+        backgroundColor: 'rgb(73, 73, 73)',
+        position: 'absolute',
+        borderRadius: 50,
+        top : 25,
+        left: 15
+    },
+    line: {
+        width: 1,
+        height: 50,
+        backgroundColor: 'rgb(202, 42, 42)',
+        position: 'absolute',
+        borderRadius: 50,
+        top : 30,
+        left: 18
     }
 });
 export default styles;

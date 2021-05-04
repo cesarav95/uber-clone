@@ -5,23 +5,53 @@
  * @format
  * @flow strict-local
  */
+import 'react-native-gesture-handler';
+import React, {useEffect} from 'react';
+import { StatusBar, PermissionsAndroid, Platform } from 'react-native'
+import Geolocation from '@react-native-community/geolocation';
 
-import React from 'react';
-import { StatusBar } from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome'
+import Router from './src/navigation/Root';
 
-import HomeScreen from './src/screens/HomeScreen/index';
-import SearchResults from './src/screens/SearchResults/index';
-import SearchPlace from './src/screens/SearchPlace';
+navigator.geolocation = require('@react-native-community/geolocation');
 
+const androidPermission = async() => {
+  try {
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      {
+        title: "UberClone Permission",
+        message:
+          "UberClone needs access to your Location " +
+          "so you can noew where you stay.",
+        buttonNeutral: "Ask Me Later",
+        buttonNegative: "Cancel",
+        buttonPositive: "OK" 
+      }
+    );
+    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      console.log("You can use the GPS");
+    } else {
+      console.log("Location permission denied");
+    }
+  } catch (err) {
+    console.warn(err);
+  }
+}
 
 const App: () => React$Node = () => {
+  useEffect(() => {
+    if (Platform.OS === 'android') {
+      androidPermission();
+    } else {
+      Geolocation.requestAuthorization();
+    }
+    
+  }, [])
  
   return (
     <>
       <StatusBar barStyle="dark-content"/> 
-      <SearchPlace/>
-      
+      <Router />
 
     </>
   );
